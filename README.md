@@ -2,31 +2,15 @@
 
 TypeScript + Zod + Axios + Jest = 🚀
 
-## Without a physical decvice present
+## Usage
 
 ```typescript
-import { KLVRCharger, KLVRDummyDevice } from '@bitfocusas/klvr-charger'
-
-const server = KLVRDummyDevice()
-server.listen(8000, () => {
-    console.log("listening")
-    client()
-})
-
-async function client() {
-    const charger = KLVRCharger('127.0.0.1')
-    console.log(await charger.chargerStatus())
-}
-```
-
-## With a device present (congrats!)
-
-```typescript
-import { KLVRCharger, KLVRDummyDevice } from '@bitfocusas/klvr-charger'
+import { KLVRCharger } from '@bitfocusas/klvr-charger'
 
 async function client() {
     const charger = KLVRCharger('192.168.0.1')
     console.log(await charger.chargerStatus())
+    console.log(await charger.deviceInfo())
 }
 client();
 ```
