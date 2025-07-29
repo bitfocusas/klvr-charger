@@ -10,11 +10,11 @@ import { KLVRCharger } from '../client'
 let server: Server
 
 const app = KLVRDummyDevice()
-const client = KLVRCharger('127.0.0.1')
+const client = KLVRCharger('127.0.0.1:8001')
 
 describe('KLVR Client Library', () => {
 	beforeAll((done) => {
-		server = app.listen(8000, () => {
+		server = app.listen(8001, () => {
 			done()
 		})
 	})

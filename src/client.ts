@@ -5,8 +5,11 @@ import Axios from 'axios'
 import type { ChargerStatus, DeviceIdentify, DeviceInfo } from './types'
 
 export function KLVRCharger(ip: string) {
+	// Handle IP addresses that may include ports
+	const baseURL = ip.includes(':') ? `http://${ip}/api/v2/` : `http://${ip}:8000/api/v2/`
+	
 	const api = Axios.create({
-		baseURL: `http://${ip}:8000/api/v1/`,
+		baseURL,
 	})
 
 	let lastError: string | null = null

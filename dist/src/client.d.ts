@@ -5,22 +5,24 @@ export declare function KLVRCharger(ip: string): {
         firmwareVersion: string;
         firmwareBuild: string;
         ip: {
+            type: "dhcp" | "static";
             ipAddress: string;
             gatewayAddress: string;
             mask: string;
             macAddress: string;
-            method: "dhcp" | "static";
         };
     } | null>;
     chargerStatus: () => Promise<{
-        deviceStatus: "ok" | "error";
-        batteries: Record<string, {
+        deviceStatus: "error" | "ok";
+        batteries: {
+            index: number;
             batteryBayTempC: number;
-            slotState: "error" | "charging" | "empty" | "not charging" | "done";
+            batteryDetected: string;
+            slotState: "charging" | "empty" | "not charging" | "error" | "done";
             stateOfChargePercent: number;
             timeRemainingSeconds: number;
             errorMsg: string;
-        }>;
+        }[];
     } | null>;
     deviceIdentify: () => Promise<boolean>;
     getLastError: () => string | null;

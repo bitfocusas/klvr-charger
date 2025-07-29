@@ -4,16 +4,22 @@
 import type { BatteryStatus } from './types'
 
 // Helper function to generate random battery status
-export function generateRandomBatteryStatus(): BatteryStatus {
+export function generateRandomBatteryStatus(index: number): BatteryStatus {
 	const randomTemperature = Math.random() * 4 + 24 // 24 to 28 degrees
 	const slotStates: BatteryStatus['slotState'][] = ['charging', 'empty', 'not charging', 'error', 'done']
 	const randomSlotState = slotStates[Math.floor(Math.random() * slotStates.length)]
 	const randomChargePercent = Number.parseFloat((Math.random() * 100).toFixed(3)) // 0 to 100 percent
 	const randomTimeRemaining = Math.floor(Math.random() * 3600) // 0 to 3600 seconds (1 hour max)
 	const randomErrorMsg = randomSlotState === 'error' ? 'Battery Error Detected' : ''
+	
+	// Randomly choose between AA and AAA batteries
+	const batteryTypes = ['KLVR-AA', 'KLVR-AAA']
+	const randomBatteryType = batteryTypes[Math.floor(Math.random() * batteryTypes.length)]
 
 	return {
+		index,
 		batteryBayTempC: randomTemperature,
+		batteryDetected: randomBatteryType,
 		slotState: randomSlotState,
 		stateOfChargePercent: randomChargePercent,
 		timeRemainingSeconds: randomTimeRemaining,
@@ -21,11 +27,11 @@ export function generateRandomBatteryStatus(): BatteryStatus {
 	}
 }
 
-// Generate 42 batteries with random status
-export function generateBatteries(): { [key: string]: BatteryStatus } {
-	const batteries: { [key: string]: BatteryStatus } = {}
-	for (let i = 0; i < 42; i++) {
-		batteries[i.toString()] = generateRandomBatteryStatus()
+// Generate 48 batteries with random status (matching the v2 API)
+export function generateBatteries(): BatteryStatus[] {
+	const batteries: BatteryStatus[] = []
+	for (let i = 0; i < 48; i++) {
+		batteries.push(generateRandomBatteryStatus(i))
 	}
 	return batteries
 }

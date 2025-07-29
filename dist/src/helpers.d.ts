@@ -1,5 +1,3 @@
 import type { BatteryStatus } from './types';
-export declare function generateRandomBatteryStatus(): BatteryStatus;
-export declare function generateBatteries(): {
-    [key: string]: BatteryStatus;
-};
+export declare function generateRandomBatteryStatus(index: number): BatteryStatus;
+export declare function generateBatteries(): BatteryStatus[];

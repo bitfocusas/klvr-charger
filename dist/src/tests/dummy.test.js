@@ -13,7 +13,7 @@ let server;
 const app = (0, dummy_1.KLVRDummyDevice)();
 (0, globals_1.describe)('KLVR Dummy Device', () => {
     (0, globals_1.beforeAll)((done) => {
-        server = app.listen(8000, () => {
+        server = app.listen(8002, () => {
             done();
         });
     });
@@ -29,25 +29,25 @@ const app = (0, dummy_1.KLVRDummyDevice)();
         }
     });
     (0, globals_1.test)('DeviceInfo: Schema', async () => {
-        const response = await (0, supertest_1.default)(app).get('/api/v1/device/info');
+        const response = await (0, supertest_1.default)(app).get('/api/v2/device/info');
         (0, globals_1.expect)(response.status).toBe(200);
         const validationResult = schema_1.DeviceInfoSchema.safeParse(response.body);
         (0, globals_1.expect)(validationResult.success).toBe(true);
     });
     (0, globals_1.test)('ChargerStatus: Schema', async () => {
-        const response = await (0, supertest_1.default)(app).get('/api/v1/charger/status');
+        const response = await (0, supertest_1.default)(app).get('/api/v2/charger/status');
         (0, globals_1.expect)(response.status).toBe(200);
         const validationResult = schema_1.ChargerStatusSchema.safeParse(response.body);
         (0, globals_1.expect)(validationResult.success).toBe(true);
     });
     (0, globals_1.test)('DeviceIdentify: Schema', async () => {
-        const response = await (0, supertest_1.default)(app).post('/api/v1/device/identify').send({});
+        const response = await (0, supertest_1.default)(app).post('/api/v2/device/identify').send({});
         (0, globals_1.expect)(response.status).toBe(200);
         const validationResult = schema_1.DeviceIdentifySchema.safeParse(response.body);
         (0, globals_1.expect)(validationResult.success).toBe(true);
     });
     (0, globals_1.test)('DeviceIdentify: Should crash on empty payload', async () => {
-        const response = await (0, supertest_1.default)(app).post('/api/v1/device/identify');
+        const response = await (0, supertest_1.default)(app).post('/api/v2/device/identify');
         (0, globals_1.expect)(response.status).toBe(200);
         const validationResult = schema_1.DeviceIdentifySchema.safeParse(response.body);
         (0, globals_1.expect)(validationResult.success).toBe(true);

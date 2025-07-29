@@ -13,7 +13,7 @@ const app = KLVRDummyDevice()
 
 describe('KLVR Dummy Device', () => {
 	beforeAll((done) => {
-		server = app.listen(8000, () => {
+		server = app.listen(8002, () => {
 			done()
 		})
 	})
@@ -31,28 +31,28 @@ describe('KLVR Dummy Device', () => {
 	})
 
 	test('DeviceInfo: Schema', async () => {
-		const response = await request(app).get('/api/v1/device/info')
+		const response = await request(app).get('/api/v2/device/info')
 		expect(response.status).toBe(200)
 		const validationResult = DeviceInfoSchema.safeParse(response.body)
 		expect(validationResult.success).toBe(true)
 	})
 
 	test('ChargerStatus: Schema', async () => {
-		const response = await request(app).get('/api/v1/charger/status')
+		const response = await request(app).get('/api/v2/charger/status')
 		expect(response.status).toBe(200)
 		const validationResult = ChargerStatusSchema.safeParse(response.body)
 		expect(validationResult.success).toBe(true)
 	})
 
 	test('DeviceIdentify: Schema', async () => {
-		const response = await request(app).post('/api/v1/device/identify').send({})
+		const response = await request(app).post('/api/v2/device/identify').send({})
 		expect(response.status).toBe(200)
 		const validationResult = DeviceIdentifySchema.safeParse(response.body)
 		expect(validationResult.success).toBe(true)
 	})
 
 	test('DeviceIdentify: Should crash on empty payload', async () => {
-		const response = await request(app).post('/api/v1/device/identify')
+		const response = await request(app).post('/api/v2/device/identify')
 		expect(response.status).toBe(200)
 		const validationResult = DeviceIdentifySchema.safeParse(response.body)
 		expect(validationResult.success).toBe(true)

@@ -3,13 +3,13 @@
 
 import { z } from 'zod'
 
-// Define Zod schemas (same as before)
+// Define Zod schemas for v2 API
 export const IPInfoSchema = z.object({
+	type: z.enum(['dhcp', 'static']),
 	ipAddress: z.string().ip(),
 	gatewayAddress: z.string().ip(),
 	mask: z.string(),
 	macAddress: z.string().regex(/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i),
-	method: z.enum(['dhcp', 'static']),
 })
 
 export const DeviceInfoSchema = z.object({
@@ -21,7 +21,9 @@ export const DeviceInfoSchema = z.object({
 })
 
 export const BatteryStatusSchema = z.object({
+	index: z.number().int().nonnegative(),
 	batteryBayTempC: z.number(),
+	batteryDetected: z.string(),
 	slotState: z.enum(['charging', 'empty', 'not charging', 'error', 'done']),
 	stateOfChargePercent: z.number().min(0).max(100),
 	timeRemainingSeconds: z.number().int().nonnegative(),
@@ -30,7 +32,7 @@ export const BatteryStatusSchema = z.object({
 
 export const ChargerStatusSchema = z.object({
 	deviceStatus: z.enum(['ok', 'error']),
-	batteries: z.record(z.string(), BatteryStatusSchema),
+	batteries: z.array(BatteryStatusSchema),
 })
 
 export const DeviceIdentifySchema = z.object({})

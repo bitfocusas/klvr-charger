@@ -1,10 +1,11 @@
 {
 	"name": "@bitfocusas/klvr-charger",
-	"version": "1.0.2",
+	"version": "2.0.0",
 	"description": "KLVR Charger Client Library (and test mockup server)",
 	"module": "dist/src/index.js",
 	"license": "MIT",
 	"main": "dist/src/index.js",
+	"private": false,
 	"scripts": {
 		"build": "tsc",
 		"dev": "bun --watch ./src/index.ts",

@@ -8,8 +8,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KLVRCharger = KLVRCharger;
 const axios_1 = __importDefault(require("axios"));
 function KLVRCharger(ip) {
+    // Handle IP addresses that may include ports
+    const baseURL = ip.includes(':') ? `http://${ip}/api/v2/` : `http://${ip}:8000/api/v2/`;
     const api = axios_1.default.create({
-        baseURL: `http://${ip}:8000/api/v1/`,
+        baseURL,
     });
     let lastError = null;
     return {

@@ -8,10 +8,10 @@ const schema_1 = require("../schema");
 const client_1 = require("../client");
 let server;
 const app = (0, dummy_1.KLVRDummyDevice)();
-const client = (0, client_1.KLVRCharger)('127.0.0.1');
+const client = (0, client_1.KLVRCharger)('127.0.0.1:8001');
 (0, globals_1.describe)('KLVR Client Library', () => {
     (0, globals_1.beforeAll)((done) => {
-        server = app.listen(8000, () => {
+        server = app.listen(8001, () => {
             done();
         });
     });
