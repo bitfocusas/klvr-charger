@@ -13,12 +13,12 @@ export declare function KLVRCharger(ip: string): {
         };
     } | null>;
     chargerStatus: () => Promise<{
-        deviceStatus: "error" | "ok";
+        deviceStatus: "ok" | "error";
         batteries: {
             index: number;
             batteryBayTempC: number;
             batteryDetected: string;
-            slotState: "charging" | "empty" | "not charging" | "error" | "done";
+            slotState: "error" | "charging" | "empty" | "not charging" | "done";
             stateOfChargePercent: number;
             timeRemainingSeconds: number;
             errorMsg: string;
