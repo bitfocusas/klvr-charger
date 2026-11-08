@@ -6,8 +6,8 @@ import { z } from 'zod'
 // Define Zod schemas for v2 API
 export const IPInfoSchema = z.object({
 	type: z.enum(['dhcp', 'static']),
-	ipAddress: z.string().ip(),
-	gatewayAddress: z.string().ip(),
+	ipAddress: z.ipv4(),
+	gatewayAddress: z.ipv4(),
 	mask: z.string(),
 	macAddress: z.string().regex(/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i),
 })
@@ -35,4 +35,4 @@ export const ChargerStatusSchema = z.object({
 	batteries: z.array(BatteryStatusSchema),
 })
 
-export const DeviceIdentifySchema = z.object({})
+export const DeviceIdentifySchema = z.looseObject({})

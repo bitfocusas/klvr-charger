@@ -7,8 +7,8 @@ const zod_1 = require("zod");
 // Define Zod schemas for v2 API
 exports.IPInfoSchema = zod_1.z.object({
     type: zod_1.z.enum(['dhcp', 'static']),
-    ipAddress: zod_1.z.string().ip(),
-    gatewayAddress: zod_1.z.string().ip(),
+    ipAddress: zod_1.z.ipv4(),
+    gatewayAddress: zod_1.z.ipv4(),
     mask: zod_1.z.string(),
     macAddress: zod_1.z.string().regex(/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i),
 });
@@ -32,5 +32,5 @@ exports.ChargerStatusSchema = zod_1.z.object({
     deviceStatus: zod_1.z.enum(['ok', 'error']),
     batteries: zod_1.z.array(exports.BatteryStatusSchema),
 });
-exports.DeviceIdentifySchema = zod_1.z.object({});
+exports.DeviceIdentifySchema = zod_1.z.looseObject({});
 //# sourceMappingURL=schema.js.map
